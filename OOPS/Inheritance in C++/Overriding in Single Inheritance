@@ -1,0 +1,40 @@
+In C++ single inheritance, overriding occurs when a derived class redefines a function that is already declared in its base class. 
+This allows the derived class to provide its own specific implementation for that function, effectively replacing the base class's implementation.
+
+Refer to the code to see how to use overriding in C++.
+
+In this example, the Animal class declares a virtual function sound(), and the Dog class overrides it with its own implementation.
+When you create objects of these classes and call the sound() function on them, the specific implementation in each class is executed.
+
+** ANSWER **
+
+#include <iostream>
+using namespace std;
+
+class Animal {
+public:
+    virtual void sound() { // Make sound() virtual for polymorphism
+        cout << "Animal makes a sound" << endl;
+    }
+};
+
+class Dog : public Animal {
+public:
+    void sound() override { // Use 'override' to indicate this function overrides a base class function
+        cout << "Dog barks" << endl;
+    }
+};
+
+int main() {
+    Animal* animal = new Animal(); // Create an Animal object
+    Animal* dog = new Dog();       // Create a Dog object as an Animal pointer
+
+    animal->sound(); // Calls Animal's sound()
+    dog->sound();    // Calls Dog's sound() due to polymorphism
+
+    // Clean up dynamically allocated memory
+    delete animal;
+    delete dog;
+
+    return 0;
+}
