@@ -1,0 +1,40 @@
+Let's see the example by using two base classes and one derived class to demonstrate the multiple inheritance ambiguity, often referred to as the "diamond problem" in C++.
+
+Suppose you have two base classes:
+
+BaseA - The first base class with a method called foo().
+BaseB - The second base class with a method called foo() as well.
+Derived - Inherits from both BaseA and BaseB.
+In this simplified example, when you call derived.foo() Line 24, the compiler doesn't know whether you want to call foo() from BaseA or BaseB because both base classes provide an implementation of foo(). This ambiguity is the essence of the diamond problem.
+
+** ANSWER **
+
+#include <iostream>
+using namespace std;
+
+class BaseA {
+public:
+    void foo() {
+        cout << "BaseA's foo()" << endl;
+    }
+};
+
+class BaseB {
+public:
+    void foo() {
+        cout << "BaseB's foo()" << endl;
+    }
+};
+
+class Derived : public BaseA, public BaseB {
+};
+
+int main() {
+    Derived derived;
+    
+    derived.foo(); // Ambiguity here!
+
+    // derived.BaseA::foo(); // Calls BaseA's foo()
+    // derived.BaseB::foo(); // Calls BaseB's foo()
+    return 0;
+}
